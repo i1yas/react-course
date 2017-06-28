@@ -1,0 +1,14 @@
+{
+  "name": "react-course",
+  "version": "1.0.0",
+  "description": "React Course",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ilyas Khalikov",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.15.3"
+  }
+}
