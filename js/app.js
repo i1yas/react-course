@@ -45,12 +45,15 @@ const News = function(props) {
     </div>
   )
 }
+News.propTypes = {
+  data: PropTypes.array.isRequired
+}
 
 const App = function() {
   return (
     <div className="app">
       <h1>Новости:</h1>
-      <News data={NEWS} />
+      <News data={NEWS}/>
     </div>
   )
 }
