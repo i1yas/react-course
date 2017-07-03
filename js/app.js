@@ -37,7 +37,7 @@ const News = function(props) {
   return (
     <div className="news">
       {newsTemplate}
-      <strong className={props.data.length > 0 ? '' : 'none'}>
+      <strong className={props.data.length > 0 ? 'news__count' : 'none'}>
         Всего новостей: {props.data.length}
       </strong>
     </div>
@@ -47,7 +47,7 @@ const News = function(props) {
 const App = function() {
   return (
     <div className="app">
-      Новости:
+      <h1>Новости:</h1>
       <News data={NEWS} />
     </div>
   )

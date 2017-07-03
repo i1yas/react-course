@@ -1,3 +1,33 @@
 .none {
 	display: none !important;
 }
+
+body {
+	background-color: #fffdf1;
+}
+
+.app {
+	margin: 0 auto;
+	max-width: 1200px;
+}
+
+.news {
+	font-size: 15px;
+}
+
+.news__author {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.news__text {
+	font-size: 1.2em;
+}
+
+.news__count {
+	display: block;
+	margin-top: 20px;
+}
+
+.article {
+	padding: 10px 0;
+}
