@@ -32,6 +32,8 @@ const News = function(props) {
           </div>
         )
     })
+  } else {
+    newsTemplate = "Новостей нет"
   }
   
   return (
