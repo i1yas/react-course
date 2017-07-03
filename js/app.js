@@ -13,29 +13,32 @@ const NEWS = [
   }
 ];
 
-const Comments = function() {
+const Article = function(props) {
   return (
-    <div className="comments">
-      No news - no comments.
-    </div>
-  )
+      <div className="article">
+        <div className="news__author">{props.data.author}</div>
+        <div className="news__text">{props.data.text}</div>
+      </div>
+    )
 }
 
 const News = function(props) {
-  const newsTemplate = props.data.map((item, index) => {
-    return (
-      <div key={index}>
-        <div className="news__author">{item.author}</div>
-        <div className="news__text">{item.text}</div>
-      </div>
-    );
-  });
+  let newsTemplate;
+  if(props.data.length > 0) {
+    newsTemplate = props.data.map((item, index) => {
+      return (
+          <div key={index}>
+            <Article data={item} />
+          </div>
+        )
+    })
+  }
   
   return (
     <div className="news">
       {newsTemplate}
       <strong className={props.data.length > 0 ? '' : 'none'}>
-      	Всего новостей: {props.data.length}
+        Всего новостей: {props.data.length}
       </strong>
     </div>
   )
@@ -44,9 +47,8 @@ const News = function(props) {
 const App = function() {
   return (
     <div className="app">
-      Hi, I am App component, here some news:
+      Новости:
       <News data={NEWS} />
-      <Comments />
     </div>
   )
 }
