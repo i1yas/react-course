@@ -34,6 +34,9 @@ const News = function(props) {
   return (
     <div className="news">
       {newsTemplate}
+      <strong className={props.data.length > 0 ? '' : 'none'}>
+      	Всего новостей: {props.data.length}
+      </strong>
     </div>
   )
 }
