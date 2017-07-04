@@ -32,7 +32,7 @@ class Article extends React.Component {
 
   render () {
     const visible = this.state.visible;
-    
+
     return (
       <div className="article">
         <div className="news__author">{this.props.data.author}</div>
@@ -58,15 +58,6 @@ class News extends React.Component {
     }
   }
 
-
-  handleClick() {
-    const incCounter = 1 + this.state.counter;
-
-    this.setState({
-      counter: incCounter
-    })
-  }
-
   render() {
     let newsTemplate;
     if(this.props.data.length > 0) {
@@ -86,7 +77,6 @@ class News extends React.Component {
         {newsTemplate}
         <strong
           className={this.props.data.length > 0 ? 'news__count' : 'none'}
-          onClick={this.handleClick.bind(this)}
         >
           Всего новостей: {this.props.data.length}
         </strong>
@@ -98,10 +88,36 @@ News.propTypes = {
   data: PropTypes.array.isRequired
 }
 
+class TestInput extends React.Component {
+
+  handleClick() {
+    console.log(this.refs)
+    alert(this.refs.textInput.value);
+  }
+
+  render() {
+    return (
+      <div>
+      <input
+        type="text"
+        className="test-input"
+        defaultValue=''
+        ref='textInput'
+        placeholder="Введите значение"
+      />
+      <button onClick={this.handleClick.bind(this)}>
+        Отправить
+      </button>
+      </div>
+    );
+  }
+}
+
 const App = function() {
   return (
     <div className="app">
-      <h1>Новости:</h1>
+      <h1>Новости</h1>
+      <TestInput />
       <News data={NEWS}/>
     </div>
   )
