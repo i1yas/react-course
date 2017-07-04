@@ -1,25 +1,53 @@
 const NEWS = [
   {
     author: 'Alex Pechkin',
-    text: 'В четверг, четвертого числа...'
+    text: 'В четверг, четвертого числа...',
+    bigText: 'В четыре с четвертью часа четыре чёрненьких чумазеньких чертёнка чертили чёрными чернилами чертёж.'
   },
   {
     author: 'Vasya',
-    text: 'Считаю, что $ должен стоить 35 рублей!'
+    text: 'Считаю, что $ должен стоить 35 рублей!',
+    bigText: 'А евро 42!'
   },
   {
     author: 'Guest',
-    text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000'
+    text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000',
+    bigText: 'На самом деле платно, просто нужно прочитать очень длинное лицензионное соглашение'
   }
 ];
 
-const Article = function(props) {
-  return (
+class Article extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      visible: false 
+    }
+  }
+
+  handleReadMore() {
+    this.setState({
+      visible: true
+    })
+  }
+
+  render () {
+    const visible = this.state.visible;
+
+    return (
       <div className="article">
-        <div className="news__author">{props.data.author}</div>
-        <div className="news__text">{props.data.text}</div>
+        <div className="news__author">{this.props.data.author}</div>
+        <div className="news__text">{this.props.data.text}</div>
+        <a
+          href="#"
+          onClick={this.handleReadMore.bind(this)}
+          className={"news__read-more " + (visible ? 'none' : '')}
+        >
+          Подробнее
+        </a>
+        <div className={"news__big-text " + (visible ? '' : 'none')}>{this.props.data.bigText}</div>
       </div>
     )
+  }
 }
 
 const News = function(props) {
