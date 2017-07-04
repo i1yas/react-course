@@ -12,15 +12,12 @@ body {
 }
 
 .news {
-	font-size: 15px;
+	font-size: 18px;
 }
 
 .news__author {
+	font-size: 0.8em;
 	color: rgba(0, 0, 0, 0.5);
-}
-
-.news__text {
-	font-size: 1.2em;
 }
 
 .news__count {
