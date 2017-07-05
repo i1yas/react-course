@@ -92,8 +92,19 @@ class Add extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      authorFilled: false,
+      textFilled: false,
       checked: false
     }
+  }
+
+  handleFieldInput(fieldName, event) {
+    const inputLength = event.target.value.trim().length;
+
+    const newState = {}
+    newState[fieldName + 'Filled'] = inputLength > 0;
+
+    this.setState(newState);
   }
 
   handleCheckboxClick() {
@@ -128,12 +139,14 @@ class Add extends React.Component {
           defaultValue=''
           ref='author'
           placeholder="Автор"
+          onChange={this.handleFieldInput.bind(this, 'author')}
         />
         <textarea
           className="add__text"
           defaultValue=''
           ref='text'
           placeholder='Текст новости'
+          onChange={this.handleFieldInput.bind(this, 'text')}
         />
         <label className="add__check-rule">
           <input
@@ -147,7 +160,7 @@ class Add extends React.Component {
         <button
           className='add__alert-button'
           ref='alertButton'
-          disabled={!this.state.checked}
+          disabled={!this.state.authorFilled || !this.state.textFilled || !this.state.checked}
           onClick={this.handleButtonClick.bind(this)}
         >
           Показать alert
