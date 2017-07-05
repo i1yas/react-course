@@ -88,29 +88,41 @@ News.propTypes = {
   data: PropTypes.array.isRequired
 }
 
-class TestInput extends React.Component {
+class Add extends React.Component {
   componentDidMount() {
-    this.refs.textInput.focus();
-  }
-
-  handleClick() {
-    alert(this.refs.textInput.value);
+    this.refs.author.focus();
   }
 
   render() {
     return (
-      <div>
-      <input
-        type="text"
-        className="test-input"
-        defaultValue=''
-        ref='textInput'
-        placeholder="Введите значение"
-      />
-      <button onClick={this.handleClick.bind(this)}>
-        Отправить
-      </button>
-      </div>
+      <form className="add">
+        <input
+          type="text"
+          className="add__author"
+          defaultValue=''
+          ref='author'
+          placeholder="Автор"
+        />
+        <textarea
+          className="add__text"
+          defaultValue=''
+          ref='text'
+          placeholder='Текст новости'
+        />
+        <label className="add__check-rule">
+          <input
+            type="checkbox"
+            ref='checkRule'
+          />
+          <span> Я согласен с правилами</span>
+        </label>
+        <button
+          className='add__alert-button'
+          ref='alertButton'
+        >
+          Показать alert
+        </button>
+      </form>
     );
   }
 }
@@ -119,7 +131,7 @@ const App = function() {
   return (
     <div className="app">
       <h1>Новости</h1>
-      <TestInput />
+      <Add/>
       <News data={NEWS}/>
     </div>
   )

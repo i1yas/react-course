@@ -11,6 +11,25 @@ body {
 	max-width: 1200px;
 }
 
+.add {
+	margin-bottom: 30px;
+	width: 50%;
+}
+@media(max-width: 700px) {
+	.add { width: 100%; }
+} 
+
+.add__author, .add__text, .add__check-rule, .add__alert-button {
+	margin: 15px 0;
+	display: block;
+}
+
+.add__author, .add__text {
+	padding: 3px 10px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .news {
 	font-size: 18px;
 }
