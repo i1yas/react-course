@@ -89,6 +89,32 @@ News.propTypes = {
 }
 
 class Add extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    }
+  }
+
+  handleCheckboxClick() {
+    this.setState({
+      checked: !this.state.checked
+    })
+  }
+
+  handleButtonClick(event) {
+    event.preventDefault();
+
+    const newsAuthor = this.refs.author.value;
+    const newsText = this.refs.text.value;
+
+    const alertMsg = `
+    Author: ${newsAuthor}
+    Text: ${newsText}`
+
+    alert(alertMsg);
+  }
+
   componentDidMount() {
     this.refs.author.focus();
   }
@@ -113,12 +139,16 @@ class Add extends React.Component {
           <input
             type="checkbox"
             ref='checkRule'
+            checked={this.state.checked}
+            onChange={this.handleCheckboxClick.bind(this)}
           />
           <span> Я согласен с правилами</span>
         </label>
         <button
           className='add__alert-button'
           ref='alertButton'
+          disabled={!this.state.checked}
+          onClick={this.handleButtonClick.bind(this)}
         >
           Показать alert
         </button>
