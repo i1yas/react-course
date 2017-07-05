@@ -89,9 +89,11 @@ News.propTypes = {
 }
 
 class TestInput extends React.Component {
+  componentDidMount() {
+    this.refs.textInput.focus();
+  }
 
   handleClick() {
-    console.log(this.refs)
     alert(this.refs.textInput.value);
   }
 
