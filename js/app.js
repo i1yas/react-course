@@ -16,6 +16,8 @@ const NEWS = [
   }
 ];
 
+window.ee = new EventEmitter();
+
 class Article extends React.Component {
   constructor(props) {
     super(props)
@@ -24,7 +26,9 @@ class Article extends React.Component {
     }
   }
 
-  handleReadMore() {
+  handleReadMore(event) {
+    event.preventDefault()
+
     this.setState({
       visible: true
     })
@@ -119,11 +123,16 @@ class Add extends React.Component {
     const newsAuthor = this.refs.author.value;
     const newsText = this.refs.text.value;
 
-    const alertMsg = `
-    Author: ${newsAuthor}
-    Text: ${newsText}`
+    const item = [{
+      author: newsAuthor,
+      text: newsText,
+      bigText: '...'
+    }];
 
-    alert(alertMsg);
+    window.ee.emit('News.add', item);
+
+    this.refs.text.value = '';
+    this.setState({textFilled: false});
   }
 
   componentDidMount() {
@@ -163,21 +172,44 @@ class Add extends React.Component {
           disabled={!this.state.authorFilled || !this.state.textFilled || !this.state.checked}
           onClick={this.handleButtonClick.bind(this)}
         >
-          Показать alert
+          Добавить новость
         </button>
       </form>
     );
   }
 }
 
-const App = function() {
-  return (
-    <div className="app">
-      <h1>Новости</h1>
-      <Add/>
-      <News data={NEWS}/>
-    </div>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      news: NEWS
+    }
+  }
+
+  componentDidMount() {
+    const that = this;
+    window.ee.addListener('News.add', function (item) {
+      const nextNews = [...that.state.news, ...item];
+      that.setState({
+        news: nextNews
+      })
+    })
+  }
+
+  componentWillMount() {
+    window.ee.removeListener('News.add');
+  }
+
+  render() {
+    return (
+        <div className="app">
+          <h1>Новости</h1>
+          <Add/>
+          <News data={this.state.news}/>
+        </div>
+      );
+  }
 }
 
 ReactDOM.render(
